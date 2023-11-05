@@ -48,7 +48,7 @@ namespace PKiK.Server.DB {
                     Username = "removed",
                     Name = "User",
                     Surname = "Removed",
-                    Password = ""
+                    PasswordHash = string.Empty
                 });
                 this.SaveChanges();
             }

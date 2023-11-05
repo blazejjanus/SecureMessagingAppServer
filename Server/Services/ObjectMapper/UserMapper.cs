@@ -10,7 +10,7 @@ namespace PKiK.Server.Services {
                 Username = user.Username,
                 Name = user.Name,
                 Surname = user.Surname,
-                Password = user.Password
+                PasswordHash = user.Password
             };
         }
 

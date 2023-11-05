@@ -1,5 +1,4 @@
-﻿using PKiK.Server.DB.DBO;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PKiK.Server.DB {
@@ -15,10 +14,13 @@ namespace PKiK.Server.DB {
         [MaxLength(50)]
         public virtual string? Surname { get; set; }
         [Required]
-        public virtual string Password { get; set; }
+        public virtual string PasswordHash { get; set; }
+        [Required]
+        public virtual string PasswordSalt { get; set; }
         public UserDBO() {
-            Username = "";
-            Password = "";
+            Username = string.Empty;
+            PasswordHash = string.Empty;
+            PasswordSalt = string.Empty;
         }
     }
 }

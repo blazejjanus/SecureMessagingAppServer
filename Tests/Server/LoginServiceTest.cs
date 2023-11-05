@@ -1,10 +1,16 @@
 ﻿namespace PKiK.Tests.Server {
     [TestClass]
     public class LoginServiceTest {
-        private LoginService loginService = new LoginService(new AuthenticationService());
-        private UserService userService = new UserService();
-        private Config config = Mocker.MockConfig();
+        private Config config;
+        private LoginService loginService;
+        private UserService userService;
 
+        public LoginServiceTest() {
+            config = Mocker.MockConfig();
+            loginService = new LoginService(new AuthenticationService(), config);
+            userService = new UserService(config);
+        }
+        
         [TestMethod]
         public void Register() {
             var result = loginService.Register(DataGenerator.User());

@@ -7,6 +7,8 @@ namespace PKiK.Server.Shared {
         public bool IsDevelopmentEnvironment { get; set; }
         [JsonPropertyName("JWT")]
         public JWTConfig JWT { get; set; }
+        [JsonPropertyName("Hashing")]
+        public HashingConfig Hashing { get; set; }
         [JsonIgnore]
         public string? ConnectionString { get; set; }
         [JsonIgnore]
@@ -14,6 +16,7 @@ namespace PKiK.Server.Shared {
 
         public Config() { 
             JWT = new JWTConfig();
+            Hashing = new HashingConfig();
         }
 
         public static Config Get() {

@@ -6,9 +6,12 @@ using System;
 using System.Security.Claims;
 using System.Text;
 
-namespace PKiK.Server.Services {
-    internal static class TokenGenerator {
-        internal static string UserToken(UserDBO user) {
+namespace PKiK.Server.Services.Utils
+{
+    internal static class TokenGenerator
+    {
+        internal static string UserToken(UserDBO user)
+        {
             var config = Config.Get();
 
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -25,8 +28,8 @@ namespace PKiK.Server.Services {
             };
             var jwtToken = new JwtSecurityToken(config.JWT.Issuer,
                 config.JWT.Audience ?? "", claims,
-                signingCredentials: 
-                    new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.JWT.SecretKey)), 
+                signingCredentials:
+                    new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config.JWT.SecretKey)),
                         SecurityAlgorithms.HmacSha256));
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }

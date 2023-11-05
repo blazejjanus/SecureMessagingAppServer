@@ -4,13 +4,28 @@ using PKiK.Server.DB;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
+using PKiK.Server.Shared;
+using PKIK.Services.Utils;
 
 namespace PKiK.Server.Services {
     public class UserService : IUserService {
+        private readonly Config _config;
+
+        public UserService(Config config) {
+            _config = config;
+        }
+
         public IActionResult AddUser(UserDTO user) {
             using (var context = new DataContext()) {
                 if (!context.Users.Any(x => x.Username == user.Username)) {
-                    context.Users.Add(ObjectMapper.User(user));
+                    var dbo = ObjectMapper.User(user);
+                    //Hash password
+                    using (var hashingHelper = new HashingHelper(_config)) {
+                        var result = hashingHelper.HashPassword(user.Password);
+                        dbo.PasswordHash = result.Hash;
+                        dbo.PasswordSalt = result.Salt;
+                    }
+                    context.Users.Add(dbo);
                     context.SaveChanges();
                     return new StatusCodeResult(StatusCodes.Status201Created);
                 } else {
@@ -48,7 +63,12 @@ namespace PKiK.Server.Services {
                     dbo.Username = user.Username;
                     dbo.Name = user.Name;
                     dbo.Surname = user.Surname;
-                    dbo.Password = user.Password;
+                    //Hash password
+                    using (var hashingHelper = new HashingHelper(_config)) {
+                        var result = hashingHelper.HashPassword(user.Password);
+                        dbo.PasswordHash = result.Hash;
+                        dbo.PasswordSalt = result.Salt;
+                    }
                     context.SaveChanges();
                     return new StatusCodeResult(StatusCodes.Status200OK);
                 } else {

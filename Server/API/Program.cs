@@ -27,6 +27,8 @@ namespace PKiK.Server.API {
                 using (var context = new DataContext()) {
                     context.CreateDefaultUsers();
                 }
+                //Add singleton config
+                builder.Services.AddSingleton(config);
                 // Add services to the container.
                 builder.Services.AddScoped<IUserService, UserService>();
                 builder.Services.AddScoped<IMessageService, MessageService>();
