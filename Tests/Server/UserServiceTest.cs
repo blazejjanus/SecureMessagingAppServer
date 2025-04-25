@@ -1,33 +1,33 @@
-﻿namespace PKiK.Tests.Server {
-    [TestClass]
-    public class UserServiceTest {
-        private Config config;
-        private UserService userService;
+﻿namespace PKiK.Tests.Server;
 
-        public UserServiceTest() {
-            config = Mocker.MockConfig();
-            userService = new UserService(config);
-        }
+[TestClass]
+public class UserServiceTest {
+    private readonly Config _config;
+    private readonly UserService _userService;
 
-        [TestMethod]
-        public void AddUser() {
-            var result = userService.AddUser(DataGenerator.User());
-            Assert.IsTrue(ResponseValidator.IsHttpResponseValid(result));
-        }
+    public UserServiceTest() {
+        _config = Mocker.MockConfig();
+        _userService = new UserService(_config);
+    }
 
-        [TestMethod]
-        public void RemoveUser() {
+    [TestMethod]
+    public void AddUser() {
+        var result = _userService.AddUser(DataGenerator.User());
+        Assert.IsTrue(ResponseValidator.IsHttpResponseValid(result));
+    }
 
-        }
+    [TestMethod]
+    public void RemoveUser() {
 
-        [TestMethod]
-        public void ModifyUser() {
+    }
 
-        }
+    [TestMethod]
+    public void ModifyUser() {
 
-        [TestMethod]
-        public void GetUser() {
+    }
 
-        }
+    [TestMethod]
+    public void GetUser() {
+
     }
 }

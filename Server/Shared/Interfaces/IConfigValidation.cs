@@ -1,5 +1,5 @@
-﻿namespace PKIK.Server.Shared.Interfaces {
-    internal interface IConfigValidation {
-        public void ValidateConfig();
-    }
+﻿namespace PKIK.Server.Shared.Interfaces;
+
+internal interface IConfigValidation {
+    public void ValidateConfig();
 }

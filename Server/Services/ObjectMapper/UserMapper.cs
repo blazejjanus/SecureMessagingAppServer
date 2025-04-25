@@ -1,42 +1,42 @@
-﻿using PKiK.Shared;
+﻿using System.Collections.Generic;
 using PKiK.Server.DB;
-using System.Collections.Generic;
+using PKiK.Shared;
 
-namespace PKiK.Server.Services {
-    public static partial class ObjectMapper {
-        public static UserDBO User(UserDTO user) {
-            return new UserDBO {
-                ID = user.ID,
-                Username = user.Username,
-                Name = user.Name,
-                Surname = user.Surname,
-                PasswordHash = user.Password
-            };
-        }
+namespace PKiK.Server.Services;
 
-        public static UserDTO User(UserDBO user) {
-            return new UserDTO {
-                ID = user.ID,
-                Username = user.Username,
-                Name = user.Name,
-                Surname = user.Surname
-            };
-        }
+public static partial class ObjectMapper {
+    public static UserDBO User(UserDTO user) {
+        return new UserDBO {
+            ID = user.ID,
+            Username = user.Username,
+            Name = user.Name,
+            Surname = user.Surname,
+            PasswordHash = user.Password
+        };
+    }
 
-        public static List<UserDBO> User(List<UserDTO> users) {
-            List<UserDBO> result = new List<UserDBO>();
-            foreach (UserDTO user in users) {
-                result.Add(User(user));
-            }
-            return result;
-        }
+    public static UserDTO User(UserDBO user) {
+        return new UserDTO {
+            ID = user.ID,
+            Username = user.Username,
+            Name = user.Name,
+            Surname = user.Surname
+        };
+    }
 
-        public static List<UserDTO> User(List<UserDBO> users) {
-            List<UserDTO> result = new List<UserDTO>();
-            foreach (UserDBO user in users) {
-                result.Add(User(user));
-            }
-            return result;
+    public static List<UserDBO> User(List<UserDTO> users) {
+        List<UserDBO> result = new List<UserDBO>();
+        foreach (UserDTO user in users) {
+            result.Add(User(user));
         }
+        return result;
+    }
+
+    public static List<UserDTO> User(List<UserDBO> users) {
+        List<UserDTO> result = new List<UserDTO>();
+        foreach (UserDBO user in users) {
+            result.Add(User(user));
+        }
+        return result;
     }
 }

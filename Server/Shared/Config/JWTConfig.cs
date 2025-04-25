@@ -1,39 +1,37 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace PKiK.Server.Shared {
-    public class JWTConfig {
-        /// <summary>
-        /// Number of days the token will be valid after generation
-        /// </summary>
-        public int DaysValid { get; set; }
-        /// <summary>
-        /// String or array of strings representing JWT Audience field
-        /// </summary>
-        public string? Audience { get; set; }
-        /// <summary>
-        /// Name of JWT Issuer
-        /// </summary>
-        public string? Issuer { get; set; }
-        /// <summary>
-        /// Secret key used to sign JWT tokens
-        /// </summary>
-        public string SecretKey { get; set; }
+namespace PKiK.Server.Shared;
 
-        public JWTConfig() { 
-            SecretKey = string.Empty;
-        }
+public class JWTConfig {
+    /// <summary>
+    /// Number of days the token will be valid after generation
+    /// </summary>
+    public int DaysValid { get; set; }
+    /// <summary>
+    /// String or array of strings representing JWT Audience field
+    /// </summary>
+    public string? Audience { get; set; }
+    /// <summary>
+    /// Name of JWT Issuer
+    /// </summary>
+    public string? Issuer { get; set; }
+    /// <summary>
+    /// Secret key used to sign JWT tokens
+    /// </summary>
+    public string SecretKey { get; set; }
 
-        [JsonIgnore]
-        public bool IsValid {
-            get {
-                if (string.IsNullOrEmpty(SecretKey) || SecretKey.Length < 64) {
-                    return false;
-                }
-                if(DaysValid < 1) {
-                    return false;
-                }
-                return true;
-            }
+    public JWTConfig() {
+        SecretKey = string.Empty;
+    }
+
+    [JsonIgnore]
+    public bool IsValid {
+        get {
+            if (string.IsNullOrEmpty(SecretKey) || SecretKey.Length < 64)
+                return false;
+            if (DaysValid < 1)
+                return false;
+            return true;
         }
     }
 }
